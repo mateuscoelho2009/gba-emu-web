@@ -3,11 +3,13 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 40vmin !important;
+  width: 40vmin !important;
+  color: #77f;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #aaf;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,5 +20,14 @@
 }
 
 .App-link {
-  color: #09d3ac;
+  color: #77f;
+  text-decoration-color: #77f;
+  display: flex;
+  align-items: center;
+}
+
+.Trending-icon {
+  margin-right: 8px;
+  width: 40px !important;
+  height: 40px !important;
 }
