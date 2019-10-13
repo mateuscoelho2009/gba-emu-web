@@ -10,12 +10,15 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Store } from './store';
+import GBAScreen from './components/GBAScreen';
 
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={Store}>
             <Switch>
                 <Route path="/" exact={true} component={App} />
+
+                <Route path="/emulator" component={GBAScreen} />
 
                 <Route path='*' component={Page404} />
             </Switch>
