@@ -746,3 +746,5 @@ GameBoyAdvanceAudio.prototype.audioProcess = function(audioProcessingEvent) {
 		}
 	}
 };
+
+export default GameBoyAdvanceAudio;
