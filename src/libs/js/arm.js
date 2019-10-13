@@ -1,4 +1,4 @@
-ARMCoreArm = function (cpu) {
+const ARMCoreArm = function (cpu) {
 	this.cpu = cpu;
 
 	this.addressingMode23Immediate = [
@@ -518,6 +518,8 @@ ARMCoreArm.prototype.constructADD = function(rd, rn, shiftOp, condOp) {
 		gprs[rd] = (gprs[rn] >>> 0) + (cpu.shifterOperand >>> 0);
 	};
 };
+
+export default ARMCoreArm;
 
 ARMCoreArm.prototype.constructADDS = function(rd, rn, shiftOp, condOp) {
 	var cpu = this.cpu;
