@@ -1,7 +1,7 @@
 
 ## What is this project?
 
-![]()
+![Pokemon Ruby Running on Browser](https://github.com/mateuscoelho2009/gba-emu-web/blob/master/public/example.png)
 
 ## Alpha and Omega
 
