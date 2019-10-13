@@ -519,8 +519,6 @@ ARMCoreArm.prototype.constructADD = function(rd, rn, shiftOp, condOp) {
 	};
 };
 
-export default ARMCoreArm;
-
 ARMCoreArm.prototype.constructADDS = function(rd, rn, shiftOp, condOp) {
 	var cpu = this.cpu;
 	var gprs = cpu.gprs;
@@ -1569,3 +1567,5 @@ ARMCoreArm.prototype.constructUMULLS = function(rd, rn, rs, rm, condOp) {
 		cpu.cpsrZ = !((gprs[rd] & 0xFFFFFFFF) || (gprs[rn] & 0xFFFFFFFF));
 	};
 };
+
+export default ARMCoreArm;
