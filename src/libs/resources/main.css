@@ -1,13 +1,4 @@
-body {
-	background: url('bg.png') no-repeat top center, -webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px);
-	background: url('bg.png') no-repeat top center, -moz-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px, #433061);
-	text-align: center;
-	margin: 0 0 15px;
-	color: white;
-	font-family: 'Calibri', 'Verdana', sans-serif;
-	font-size: 15px;
-	text-shadow: 0 2px rgba(0, 0, 0, 0.6);
-}
+
 
 button {
 	font-family: 'Calibri', 'Verdana', sans-serif;

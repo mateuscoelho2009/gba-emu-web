@@ -3,7 +3,26 @@ import GameBoyAdvance from '../libs/js/gba';
 import loadRom from '../libs/resources/xhr';
 import '../libs/resources/main.css';
 import CrashImage from '../libs/resources/crash.png';
+import BackgroundImage from '../libs/resources/bg.png';
 import Bios from '../libs/resources/bios.bin';
+import { withStyles } from '@material-ui/core';
+
+const styles = () => ({
+    container: {
+        width: '100%',
+        height: '100%',
+        minHeight: '100vh',
+	    margin: '0 0 15px',
+        background: '-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)',
+        textAlign: 'center',
+        fontFamily: '"Calibri", "Verdana", sans-serif',
+        color: 'white',
+        textShadow: '0 2px rgba(0, 0, 0, 0.6)',
+    },
+    screen: {
+        background: `url('${BackgroundImage}') no-repeat top center`,
+    },
+});
 
 class GBAScreen extends React.Component {
     componentDidMount() {
@@ -327,36 +346,42 @@ class GBAScreen extends React.Component {
     }
 
     render() {
+        const {
+            classes,
+        } = this.props;
+
         return (
-            <>
-                <canvas id="screen" width="480" height="320"></canvas>
+            <div className={classes.container}>
+                <div className={classes.screen}>
+                    <canvas id="screen" width="480" height="320"></canvas>
 
-                <div id="controls">
-                    <h4>App Controls</h4>
-                    <div id="preload">
-                        <button id="select"> Select ROM file </button>
-                        <input id="loader" type="file" accept=".gba" />
-                        <button id="select-savegame-btn">Upload Savegame</button>
-                        <input id="saveloader" type="file" />
-                    </div>
-                    <br />
-                    <h4>In-game controls</h4>
-                    <div id="ingame" class="hidden">
-                        <button id="pause">Pause game</button>
-                        <button id="reset-btn">Reset</button>
-                        <button id="download-savegame">Download Savegame File</button>
+                    <div id="controls">
+                        <h4>App Controls</h4>
+                        <div id="preload">
+                            <button id="select"> Select ROM file </button>
+                            <input id="loader" type="file" accept=".gba" />
+                            <button id="select-savegame-btn">Upload Savegame</button>
+                            <input id="saveloader" type="file" />
+                        </div>
+                        <br />
+                        <h4>In-game controls</h4>
+                        <div id="ingame" class="hidden">
+                            <button id="pause">Pause game</button>
+                            <button id="reset-btn">Reset</button>
+                            <button id="download-savegame">Download Savegame File</button>
 
-                        <div id="sound">
-                            <p>Audio enabled</p>
-                            <input type="checkbox" id="audio-enabled-checkbox" checked="checked" />
-                            <p>Change sound level</p>
-                            <input id="volume-level-slider" type="range" min="0" max="1" value="1" step="any" />
+                            <div id="sound">
+                                <p>Audio enabled</p>
+                                <input type="checkbox" id="audio-enabled-checkbox" checked="checked" />
+                                <p>Change sound level</p>
+                                <input id="volume-level-slider" type="range" min="0" max="1" value="1" step="any" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 }
 
-export default GBAScreen;
+export default withStyles(styles)(GBAScreen);
