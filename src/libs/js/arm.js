@@ -46,7 +46,7 @@ const ARMCoreArm = function (cpu) {
 		function(rn, offset, condOp) {
 			var gprs = cpu.gprs;
 			var address = function() {
-				return addr = gprs[rn] - offset;
+				return gprs[rn] - offset;
 			};
 			address.writesPC = false;
 			return address;
@@ -73,7 +73,7 @@ const ARMCoreArm = function (cpu) {
 		function(rn, offset, condOp) {
 			var gprs = cpu.gprs;
 			var address = function() {
-				return addr = gprs[rn] + offset;
+				return gprs[rn] + offset;
 			};
 			address.writesPC = false;
 			return address;

@@ -1,7 +1,6 @@
 function GameBoyAdvanceAudio() {
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	if (window.AudioContext) {
-		var self = this;
 		this.context = new AudioContext();
 		this.bufferSize = 0;
 		this.bufferSize = 4096;
@@ -13,7 +12,7 @@ function GameBoyAdvanceAudio() {
 		} else {
 			this.jsAudio = this.context.createJavaScriptNode(this.bufferSize);
 		}
-		this.jsAudio.onaudioprocess = function(e) { self.audioProcess(e) };
+		this.jsAudio.onaudioprocess = function(e) { this.audioProcess(e) };
 	} else {
 		this.context = null;
 	}

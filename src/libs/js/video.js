@@ -1,3 +1,5 @@
+import GameBoyAdvanceSoftwareRenderer from './video/software';
+
 function GameBoyAdvanceVideo() {
 	this.renderPath = new GameBoyAdvanceSoftwareRenderer();
 
@@ -178,3 +180,5 @@ GameBoyAdvanceVideo.prototype.finishDraw = function(pixelData) {
 	this.context.putImageData(pixelData, 0, 0);
 	this.drawCallback();
 };
+
+export default GameBoyAdvanceVideo;

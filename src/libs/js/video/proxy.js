@@ -1,3 +1,6 @@
+import { Serializer } from './util';
+import { MemoryView } from '../mmu';
+
 function MemoryProxy(owner, size, blockSize) {
 	this.owner = owner;
 	this.blocks = [];
@@ -79,6 +82,8 @@ MemoryProxy.prototype.store32 = function(offset, value) {
 };
 
 MemoryProxy.prototype.invalidatePage = function(address) {};
+
+export MemoryProxy;
 
 function GameBoyAdvanceRenderProxy() {
 	this.worker = new Worker('js/video/worker.js');
@@ -325,3 +330,5 @@ GameBoyAdvanceRenderProxy.prototype.finishDraw = function(caller) {
 		}
 	}
 };
+
+export default GameBoyAdvanceRenderProxy;

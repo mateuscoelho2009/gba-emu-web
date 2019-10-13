@@ -1,10 +1,4 @@
-Object.prototype.inherit = function() {
-	for (var v in this) {
-		this[v] = this[v];
-	}
-};
-
-function hex(number, leading, usePrefix) {
+export function hex(number, leading, usePrefix) {
 	if (typeof(usePrefix) === 'undefined') {
 		usePrefix = true;
 	}
@@ -18,7 +12,7 @@ function hex(number, leading, usePrefix) {
 	return (usePrefix ? '0x' : '') + new Array(leading + 1).join('0') + string;
 }
 
-Serializer = {
+const Serializer = {
 	TAG_INT: 1,
 	TAG_STRING: 2,
 	TAG_STRUCT: 3,
@@ -51,7 +45,7 @@ Serializer = {
 	serialize: function(stream) {
 		var parts = [];
 		var size = 4;
-		for (i in stream) {
+		for (let i in stream) {
 			if (stream.hasOwnProperty(i)) {
 				var tag;
 				var head = Serializer.prefix(i);
@@ -212,7 +206,7 @@ Serializer = {
 					}
 				}
 			}
-			newBlob = new Blob(data.map(function (byte) {
+			const newBlob = new Blob(data.map(function (byte) {
 				var array = new Uint8Array(1);
 				array[0] = byte;
 				return array;
@@ -250,3 +244,5 @@ Serializer.pointer.prototype.readString = function(view) {
 	}
 	return bytes.join('');
 };
+
+export default Serializer;

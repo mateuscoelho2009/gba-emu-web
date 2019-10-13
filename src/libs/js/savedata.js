@@ -1,3 +1,5 @@
+import { MemoryView } from './mmu';
+
 function SRAMSavedata(size) {
 	MemoryView.call(this, new ArrayBuffer(size), 0);
 
@@ -304,4 +306,10 @@ EEPROMSavedata.prototype.store32 = function(offset, value) {
 
 EEPROMSavedata.prototype.replaceData = function(memory) {
 	MemoryView.prototype.replaceData.call(this, memory, 0);
+};
+
+export {
+	EEPROMSavedata,
+	FlashSavedata,
+	SRAMSavedata,
 };

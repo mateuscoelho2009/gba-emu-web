@@ -129,7 +129,7 @@ GameBoyAdvanceKeypad.prototype.gamepadConnectHandler = function(gamepad) {
 };
 
 GameBoyAdvanceKeypad.prototype.gamepadDisconnectHandler = function(gamepad) {
-	this.gamepads = self.gamepads.filter(function(other) { return other != gamepad });
+	this.gamepads = window.self.gamepads.filter(function(other) { return other != gamepad });
 };
 
 GameBoyAdvanceKeypad.prototype.pollGamepads = function() {
@@ -167,3 +167,5 @@ GameBoyAdvanceKeypad.prototype.registerHandlers = function() {
 	window.addEventListener("mozgamepaddisconnected", this.gamepadDisconnectHandler.bind(this), true);
 	window.addEventListener("webkitgamepaddisconnected", this.gamepadDisconnectHandler.bind(this), true);
 };
+
+export default GameBoyAdvanceKeypad;

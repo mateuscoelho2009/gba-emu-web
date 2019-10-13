@@ -1,3 +1,5 @@
+import { hex } from '../js/util';
+
 function Console(gba) {
 	this.cpu = gba.cpu;
 	this.gba = gba;
@@ -255,7 +257,7 @@ Console.prototype.testBreakpoints = function() {
 	return this.gba.waitFrame();
 };
 
-Memory = function(mmu) {
+const Memory = function(mmu) {
 	this.mmu = mmu;
 	this.ul = document.getElementById('memoryView');
 	row = this.createRow(0);

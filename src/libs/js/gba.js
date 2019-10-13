@@ -1,3 +1,12 @@
+import ARMCore from './core';
+import GameBoyAdvanceMMU from './mmu';
+import GameBoyAdvanceInterruptHandler from './irq';
+import GameBoyAdvanceIO from './io';
+import GameBoyAdvanceAudio from './audio';
+import GameBoyAdvanceVideo from './video';
+import GameBoyAdvanceKeypad from './keypad';
+import GameBoyAdvanceSIO from './sio';
+
 function GameBoyAdvance() {
 	this.LOG_ERROR = 1;
 	this.LOG_WARN = 2;
@@ -10,6 +19,12 @@ function GameBoyAdvance() {
 	this.logLevel = this.LOG_ERROR | this.LOG_WARN;
 
 	this.rom = null;
+
+	Object.prototype.inherit = function() {
+		for (var v in this) {
+			this[v] = this[v];
+		}
+	};
 
 	this.cpu = new ARMCore();
 	this.mmu = new GameBoyAdvanceMMU()
@@ -200,7 +215,7 @@ GameBoyAdvance.prototype.runStable = function() {
 				if (self.paused) {
 					return;
 				} else {
-					queueFrame(runFunc);
+					window.queueFrame(runFunc);
 				}
 				start = Date.now();
 				self.advanceFrame();
@@ -224,7 +239,7 @@ GameBoyAdvance.prototype.runStable = function() {
 				if (self.paused) {
 					return;
 				} else {
-					queueFrame(runFunc);
+					window.queueFrame(runFunc);
 				}
 				self.advanceFrame();
 			} catch(exception) {
@@ -236,7 +251,7 @@ GameBoyAdvance.prototype.runStable = function() {
 			}
 		};
 	}
-	queueFrame(runFunc);
+	window.queueFrame(runFunc);
 };
 
 GameBoyAdvance.prototype.setSavedata = function(data) {
@@ -416,3 +431,5 @@ GameBoyAdvance.prototype.ASSERT = function(test, err) {
 		throw new Error("Assertion failed: " + err);
 	}
 };
+
+export default GameBoyAdvance;

@@ -1,3 +1,5 @@
+import Serializer from './util';
+
 function GameBoyAdvanceIO() {
 	// Video
 	this.DISPCNT = 0x000;
@@ -365,16 +367,16 @@ GameBoyAdvanceIO.prototype.loadU16 = function(offset) {
 GameBoyAdvanceIO.prototype.store8 = function(offset, value) {
 	switch (offset) {
 	case this.WININ:
-		this.value & 0x3F;
+		this.value &= 0x3F;
 		break;
 	case this.WININ | 1:
-		this.value & 0x3F;
+		this.value &= 0x3F;
 		break;
 	case this.WINOUT:
-		this.value & 0x3F;
+		this.value &= 0x3F;
 		break;
 	case this.WINOUT | 1:
-		this.value & 0x3F;
+		this.value &= 0x3F;
 		break;
 	case this.SOUND1CNT_LO:
 	case this.SOUND1CNT_LO | 1:

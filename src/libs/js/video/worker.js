@@ -1,4 +1,4 @@
-importScripts('software.js');
+import GameBoyAdvanceSoftwareRenderer from './software';
 
 var video = new GameBoyAdvanceSoftwareRenderer();
 var proxyBacking = null;
