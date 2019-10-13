@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Initially uses the project [gbajs](https://github.com/endrift/gbajs) which was descontinued.
+
+This project intends to:
+- Create a react component that can be used for playing GameBoy Advanced games in browser;
+- Refactor code from [gbajs](https://github.com/endrift/gbajs);
+- Include mobile gameplay support;
+- Develop a platform for playing GBA online.
+
 ## How to Run This Project?
 
 Have [npm](https://www.npmjs.com/) or yarn installed.<br />
