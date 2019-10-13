@@ -59,6 +59,8 @@ MemoryView.prototype.replaceData = function(memory, offset) {
 	}
 };
 
+export MemoryView;
+
 function MemoryBlock(size, cacheBits) {
 	MemoryView.call(this, new ArrayBuffer(size));
 	this.ICACHE_PAGE_BITS = cacheBits;
@@ -74,6 +76,8 @@ MemoryBlock.prototype.invalidatePage = function(address) {
 		page.invalid = true;
 	}
 };
+
+export MemoryBlock;
 
 function ROMView(rom, offset) {
 	MemoryView.call(this, rom, offset);
@@ -105,6 +109,8 @@ ROMView.prototype.store32 = function(offset, value) {
 		this.gpio.store32(offset, value);
 	}
 };
+
+export ROMView;
 
 function BIOSView(rom, offset) {
 	MemoryView.call(this, rom, offset);
@@ -156,6 +162,8 @@ BIOSView.prototype.store16 = function(offset, value) {};
 
 BIOSView.prototype.store32 = function(offset, value) {};
 
+export BIOSView;
+
 function BadMemory(mmu, cpu) {
 	this.inherit();
 	this.cpu = cpu;
@@ -194,6 +202,8 @@ BadMemory.prototype.store16 = function(offset, value) {};
 BadMemory.prototype.store32 = function(offset, value) {};
 
 BadMemory.prototype.invalidatePage = function(address) {};
+
+export BadMemory;
 
 function GameBoyAdvanceMMU() {
 	this.inherit();
@@ -812,3 +822,5 @@ GameBoyAdvanceMMU.prototype.flushSave = function() {
 GameBoyAdvanceMMU.prototype.allocGPIO = function(rom) {
 	return new GameBoyAdvanceGPIO(this.core, rom);
 };
+
+export GameBoyAdvanceMMU;

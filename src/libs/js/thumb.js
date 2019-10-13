@@ -1,4 +1,4 @@
-ARMCoreThumb = function (cpu) {
+const ARMCoreThumb = function (cpu) {
 	this.cpu = cpu;
 };
 
@@ -852,3 +852,5 @@ ARMCoreThumb.prototype.constructTST = function(rd, rm) {
 		cpu.cpsrZ = !(aluOut & 0xFFFFFFFF);
 	};
 };
+
+export default ARMCoreThumb;

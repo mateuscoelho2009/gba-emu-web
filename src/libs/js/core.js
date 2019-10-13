@@ -1,3 +1,6 @@
+import ARMCoreArm from './arm';
+import ARMCoreThumb from './thumb';
+
 function ARMCore() {
 	this.inherit();
 	this.SP = 13;
@@ -1475,3 +1478,5 @@ ARMCore.prototype.compileThumb = function(instruction) {
 	op.fixedJump = op.fixedJump || false;
 	return op;
 };
+
+export default ARMCore;
