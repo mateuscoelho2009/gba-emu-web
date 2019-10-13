@@ -3,6 +3,7 @@ import GameBoyAdvance from '../libs/js/gba';
 import loadRom from '../libs/resources/xhr';
 import '../libs/resources/main.css';
 import CrashImage from '../libs/resources/crash.png';
+import Bios from '../libs/resources/bios.bin';
 
 class GBAScreen extends React.Component {
     componentDidMount() {
@@ -47,7 +48,7 @@ class GBAScreen extends React.Component {
                 gba.logLevel = gba.LOG_ERROR;
 
                 // Load the BIOS file of GBA (change the path according to yours)
-                loadRom('../libs/resources/bios.bin', function (bios) {
+                loadRom(Bios, function (bios) {
                     gba.setBios(bios);
                 });
 
