@@ -1,3 +1,10 @@
+
+## What is this project?
+
+![]()
+
+## Alpha and Omega
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Initially uses the project [gbajs](https://github.com/endrift/gbajs) which was descontinued.
