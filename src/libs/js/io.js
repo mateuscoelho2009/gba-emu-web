@@ -824,3 +824,5 @@ GameBoyAdvanceIO.prototype.invalidatePage = function(address) {};
 GameBoyAdvanceIO.prototype.STUB_REG = function(type, offset) {
 	this.core.STUB('Unimplemented ' + type + ' register write: ' + offset.toString(16));
 };
+
+export default GameBoyAdvanceIO;
