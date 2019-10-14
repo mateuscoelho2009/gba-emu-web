@@ -12,7 +12,6 @@ const styles = () => ({
         width: '100%',
         height: '100%',
         minHeight: '100vh',
-	    margin: '0 0 15px',
         background: '-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)',
         textAlign: 'center',
         fontFamily: '"Calibri", "Verdana", sans-serif',
@@ -29,37 +28,37 @@ class GBAScreen extends React.Component {
         var gba;
         var runCommands = [];
 
-        // Setup the emulator
-        try {
-            gba = new GameBoyAdvance();
-            gba.keypad.eatInput = true;
-
-            gba.setLogger(function (level, error) {
-                console.error(error);
-                
-                gba.pause();
-                
-                var screen = document.getElementById('screen');
-                
-                if (screen.getAttribute('class') == 'dead') {
-                    console.log('We appear to have crashed multiple times without reseting.');
-                    return;
-                }
-
-                // Show error image in the emulator screen
-                // The image can be retrieven from the repository
-                var crash = document.createElement('img');
-                crash.setAttribute('id', 'crash');
-                crash.setAttribute('src', CrashImage);
-                screen.parentElement.insertBefore(crash, screen);
-                screen.setAttribute('class', 'dead');
-            });
-        } catch (exception) {
-            gba = null;
-        }
-
         // Initialize emulator once the browser loads
         window.onload = function () {
+            // Setup the emulator
+            try {
+                gba = new GameBoyAdvance();
+                gba.keypad.eatInput = true;
+
+                gba.setLogger(function (level, error) {
+                    console.error(error);
+                    
+                    gba.pause();
+                    
+                    var screen = document.getElementById('screen');
+                    
+                    if (screen.getAttribute('class') == 'dead') {
+                        console.log('We appear to have crashed multiple times without reseting.');
+                        return;
+                    }
+
+                    // Show error image in the emulator screen
+                    // The image can be retrieven from the repository
+                    var crash = document.createElement('img');
+                    crash.setAttribute('id', 'crash');
+                    crash.setAttribute('src', CrashImage);
+                    screen.parentElement.insertBefore(crash, screen);
+                    screen.setAttribute('class', 'dead');
+                });
+            } catch (exception) {
+                gba = null;
+            }
+
             if (gba && FileReader) {
                 var canvas = document.getElementById('screen');
                 gba.setCanvas(canvas);
@@ -365,16 +364,16 @@ class GBAScreen extends React.Component {
                         </div>
                         <br />
                         <h4>In-game controls</h4>
-                        <div id="ingame" class="hidden">
+                        <div id="ingame" className="hidden">
                             <button id="pause">Pause game</button>
                             <button id="reset-btn">Reset</button>
                             <button id="download-savegame">Download Savegame File</button>
 
                             <div id="sound">
                                 <p>Audio enabled</p>
-                                <input type="checkbox" id="audio-enabled-checkbox" checked="checked" />
+                                <input type="checkbox" id="audio-enabled-checkbox" />
                                 <p>Change sound level</p>
-                                <input id="volume-level-slider" type="range" min="0" max="1" value="1" step="any" />
+                                <input id="volume-level-slider" type="range" min="0" max="1" step="any" />
                             </div>
                         </div>
                     </div>

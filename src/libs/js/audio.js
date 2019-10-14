@@ -1,4 +1,11 @@
 function GameBoyAdvanceAudio() {
+	this.masterEnable = true;
+	this.masterVolume = 1.0;
+
+	this.SOUND_MAX = 0x400;
+	this.FIFO_MAX = 0x200;
+	this.PSG_MAX = 0x080;
+
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	if (window.AudioContext) {
 		this.context = new AudioContext();
@@ -12,17 +19,42 @@ function GameBoyAdvanceAudio() {
 		} else {
 			this.jsAudio = this.context.createJavaScriptNode(this.bufferSize);
 		}
+
+		this.audioProcess = function(audioProcessingEvent) {
+			var left = audioProcessingEvent.outputBuffer.getChannelData(0);
+			var right = audioProcessingEvent.outputBuffer.getChannelData(1);
+			if (this.masterEnable) {
+				var i;
+				var o = this.outputPointer;
+				for (i = 0; i < this.bufferSize; ++i, o += this.resampleRatio) {
+					if (o >= this.maxSamples) {
+						o -= this.maxSamples;
+					}
+					if ((o | 0) == this.samplePointer) {
+						++this.backup;
+						break;
+					}
+					left[i] = this.buffers[0][o | 0];
+					right[i] = this.buffers[1][o | 0];
+				}
+				for (; i < this.bufferSize; ++i) {
+					left[i] = 0;
+					right[i] = 0;
+				}
+				this.outputPointer = o;
+				++this.totalSamples;
+			} else {
+				for (i = 0; i < this.bufferSize; ++i) {
+					left[i] = 0;
+					right[i] = 0;
+				}
+			}
+		};
+
 		this.jsAudio.onaudioprocess = function(e) { this.audioProcess(e) };
 	} else {
 		this.context = null;
 	}
-
-	this.masterEnable = true;
-	this.masterVolume = 1.0;
-
-	this.SOUND_MAX = 0x400;
-	this.FIFO_MAX = 0x200;
-	this.PSG_MAX = 0x080;
 };
 
 GameBoyAdvanceAudio.prototype.clear = function() {
@@ -713,37 +745,6 @@ GameBoyAdvanceAudio.prototype.sample = function() {
 		this.buffers[1][samplePointer] = sampleRight;
 	}
 	this.samplePointer = (samplePointer + 1) & this.sampleMask;
-};
-
-GameBoyAdvanceAudio.prototype.audioProcess = function(audioProcessingEvent) {
-	var left = audioProcessingEvent.outputBuffer.getChannelData(0);
-	var right = audioProcessingEvent.outputBuffer.getChannelData(1);
-	if (this.masterEnable) {
-		var i;
-		var o = this.outputPointer;
-		for (i = 0; i < this.bufferSize; ++i, o += this.resampleRatio) {
-			if (o >= this.maxSamples) {
-				o -= this.maxSamples;
-			}
-			if ((o | 0) == this.samplePointer) {
-				++this.backup;
-				break;
-			}
-			left[i] = this.buffers[0][o | 0];
-			right[i] = this.buffers[1][o | 0];
-		}
-		for (; i < this.bufferSize; ++i) {
-			left[i] = 0;
-			right[i] = 0;
-		}
-		this.outputPointer = o;
-		++this.totalSamples;
-	} else {
-		for (i = 0; i < this.bufferSize; ++i) {
-			left[i] = 0;
-			right[i] = 0;
-		}
-	}
 };
 
 export default GameBoyAdvanceAudio;
