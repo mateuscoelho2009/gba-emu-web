@@ -21,12 +21,92 @@ const styles = () => ({
     screen: {
         background: `url('${BackgroundImage}') no-repeat top center`,
     },
+    canvas: {
+        marginTop: 85,
+        marginBottom: 150,
+        
+        '&[width="240"]': {
+            marginTop: 42.5,
+            marginBottom: -363, /* Take up no height */
+            imageRendering: '-webkit-optimize-contrast',
+            imageRendering: '-moz-crisp-edges',
+            imageRendering: '-o-crisp-edges',
+            zoom: 2,
+            transform: 'scale(2)',
+        }
+    },
+    controls: {
+        borderRadius: 20,
+        border: '1px solid rgba(0, 0, 0, 0.4)',
+        borderTop: 'none',
+        boxShadow: '0 4px 4px -2px rgba(0, 0, 0, 0.9), 0 -40px 2px -1px #433061 inset',
+        width: 640,
+        margin: 'auto',
+        height: 200,
+        overflow: 'hidden',
+        backgroundColor: '#765490',
+        position: 'relative',
+
+        '&::before': {
+            content: '""',
+            display: 'block',
+            height: 30,
+            width: 647,
+            borderRadius: '5px / 15px',
+            border: '1px solid rgba(0, 0, 0, 0.4)',
+            borderWidth: '0 1px',
+            margin: '0 -5px 20px',
+            background: '-moz-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061)',
+            background: '-webkit-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061)',
+            boxShadow: '0 5px 4px -3px rgba(0, 0, 0, 0.6)',
+            position: 'absolute',
+        },
+        '& > div': {
+            // marginTop: 30,
+            marginTop: -15,
+            transform: 'rotateX(0deg)',
+            transformOrigin: '50% 0',
+            transition: 'transform linear 0.5s',
+            '-moz-transform-origin': '50% 0',
+            '-moz-transform': 'rotateX(0deg)',
+            '-moz-transition': '-moz-transform linear 0.5s',
+            '-webkit-transform-origin-y': 2,
+            '-webkit-transform': 'rotateX(0deg)',
+            '-webkit-transition': '-webkit-transform linear 0.5s',
+        },
+    },
+    hidden: {
+        transform: 'rotateX(90deg) !important',
+        // -moz-transform: 'rotateX(90deg) !important';
+	    // -webkit-transform: 'rotateX(90deg) !important';
+    },
+    dead: {
+        display: 'none',
+    },
+    button: {
+        fontFamily: '"Calibri", "Verdana", sans-serif',
+        backgroundColor: '#6A4883',
+        fontWeight: 'bold',
+        fontSize: 18,
+        color: 'white',
+        textShadow: '0 3px #433061',
+        padding: '2px 10px 5px',
+        borderRadius: '0 0 10px 10px',
+        border: '0 solid rgba(0, 0, 0, 0.4)',
+        borderWidth: '3px 1px 0px',
+        display: 'inline',
+        boxShadow: '0 2px 6px -1px rgba(0, 0, 0, 0.2) inset',
+        margin: '0 0 20px',
+    },
 });
 
 class GBAScreen extends React.Component {
     componentDidMount() {
         var gba;
         var runCommands = [];
+        const {
+            classes,
+        } = this.props;
 
         // Initialize emulator once the browser loads
         window.onload = function () {
@@ -42,7 +122,7 @@ class GBAScreen extends React.Component {
                     
                     var screen = document.getElementById('screen');
                     
-                    if (screen.getAttribute('class') == 'dead') {
+                    if (screen.getAttribute('class') === classes.dead) {
                         console.log('We appear to have crashed multiple times without reseting.');
                         return;
                     }
@@ -53,7 +133,7 @@ class GBAScreen extends React.Component {
                     crash.setAttribute('id', 'crash');
                     crash.setAttribute('src', CrashImage);
                     screen.parentElement.insertBefore(crash, screen);
-                    screen.setAttribute('class', 'dead');
+                    screen.setAttribute('class', classes.dead);
                 });
             } catch (exception) {
                 gba = null;
@@ -93,13 +173,13 @@ class GBAScreen extends React.Component {
                 if (kill) {
                     e.parentElement.removeChild(e);
                 } else {
-                    e.setAttribute('class', 'dead');
+                    e.setAttribute('class', classes.dead);
                     e.removeEventListener('webkitTransitionEnd', removeSelf);
                     e.removeEventListener('oTransitionEnd', removeSelf);
                     e.removeEventListener('transitionend', removeSelf);
                 }
                 if (e2) {
-                    e2.setAttribute('class', 'hidden');
+                    e2.setAttribute('class', classes.hidden);
                     setTimeout(function () {
                         e2.removeAttribute('class');
                     }, 0);
@@ -109,7 +189,7 @@ class GBAScreen extends React.Component {
             e.addEventListener('webkitTransitionEnd', removeSelf, false);
             e.addEventListener('oTransitionEnd', removeSelf, false);
             e.addEventListener('transitionend', removeSelf, false);
-            e.setAttribute('class', 'hidden');
+            e.setAttribute('class', classes.hidden);
         }
 
         /**
@@ -352,22 +432,21 @@ class GBAScreen extends React.Component {
         return (
             <div className={classes.container}>
                 <div className={classes.screen}>
-                    <canvas id="screen" width="480" height="320"></canvas>
+                    <canvas id="screen" className={classes.canvas} width="480" height="320"></canvas>
 
-                    <div id="controls">
-                        <h4>App Controls</h4>
+                    <div id="controls" className={classes.controls}>
                         <div id="preload">
-                            <button id="select"> Select ROM file </button>
+                            <h4>App Controls</h4>
+                            <button className={classes.button} id="select"> Select ROM file </button>
                             <input id="loader" type="file" accept=".gba" />
-                            <button id="select-savegame-btn">Upload Savegame</button>
+                            <button className={classes.button} id="select-savegame-btn">Upload Savegame</button>
                             <input id="saveloader" type="file" />
                         </div>
-                        <br />
-                        <h4>In-game controls</h4>
-                        <div id="ingame" className="hidden">
-                            <button id="pause">Pause game</button>
-                            <button id="reset-btn">Reset</button>
-                            <button id="download-savegame">Download Savegame File</button>
+                        <div id="ingame" className={classes.hidden}>
+                            <h4>In-game controls</h4>
+                            <button className={classes.button} id="pause">Pause game</button>
+                            <button className={classes.button} id="reset-btn">Reset</button>
+                            <button className={classes.button} id="download-savegame">Download Savegame File</button>
 
                             <div id="sound">
                                 <p>Audio enabled</p>
