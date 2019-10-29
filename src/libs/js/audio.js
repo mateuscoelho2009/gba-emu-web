@@ -51,7 +51,9 @@ function GameBoyAdvanceAudio() {
 			}
 		};
 
-		this.jsAudio.onaudioprocess = function(e) { this.audioProcess(e) };
+		this.jsAudio.onaudioprocess = (e) => {
+			this.audioProcess(e);
+		};
 	} else {
 		this.context = null;
 	}

@@ -101,7 +101,17 @@ const styles = () => ({
 });
 
 class GBAScreen extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.initGBA = this.initGBA.bind(this);
+    }
+
     componentDidMount() {
+        this.initGBA();
+    }
+
+    initGBA() {
         var gba;
         var runCommands = [];
         const {
@@ -135,6 +145,36 @@ class GBAScreen extends React.Component {
                     screen.parentElement.insertBefore(crash, screen);
                     screen.setAttribute('class', classes.dead);
                 });
+
+                // In order to pause/resume the game when the user changes the website tab in the browser
+                // add the 2 following listeners to the window !
+                // 
+                // This feature is problematic/tricky to handle, so you can make it better if you need to
+                window.onblur = function () {
+                    if(gba.hasRom()){
+                        var e = document.getElementById('pause');
+
+                        if (!gba.paused) {
+                            gba.pause();
+                            e.textContent = "UNPAUSE";
+
+                            console.log("Window Focused: the game has been paused");
+                        }
+                    }
+                };
+
+                window.onfocus = function () {
+                    if(gba.hasRom()){
+                        var e = document.getElementById('pause');
+
+                        if (gba.paused) {
+                            gba.runStable();
+                            e.textContent = "PAUSE";
+
+                            console.log("Window Focused: the game has been resumed");
+                        }
+                    }
+                };
             } catch (exception) {
                 gba = null;
             }
@@ -346,6 +386,11 @@ class GBAScreen extends React.Component {
             document.getElementById("loader").click();
         }, false);
 
+        // One-liner to resume playback when user interacted with the page.
+        document.querySelector('button').addEventListener('click', function() {
+            gba.audio.context.resume();
+        });
+
         // Run the emulator with the loaded ROM
         document.getElementById("loader").addEventListener("change", function(){
             var ROM = this.files[0];
@@ -391,37 +436,9 @@ class GBAScreen extends React.Component {
         document.getElementById("volume-level-slider").addEventListener("input", function(){
             var volumeLevel = this.value;
             setVolume(volumeLevel);
+
+            console.log(gba.audio);
         }, false); 
-
-        // In order to pause/resume the game when the user changes the website tab in the browser
-        // add the 2 following listeners to the window !
-        // 
-        // This feature is problematic/tricky to handle, so you can make it better if you need to
-        window.onblur = function () {
-            if(gba.hasRom()){
-                var e = document.getElementById('pause');
-
-                if (!gba.paused) {
-                    gba.pause();
-                    e.textContent = "UNPAUSE";
-
-                    console.log("Window Focused: the game has been paused");
-                }
-            }
-        };
-
-        window.onfocus = function () {
-            if(gba.hasRom()){
-                var e = document.getElementById('pause');
-
-                if (gba.paused) {
-                    gba.runStable();
-                    e.textContent = "PAUSE";
-
-                    console.log("Window Focused: the game has been resumed");
-                }
-            }
-        };
     }
 
     render() {
