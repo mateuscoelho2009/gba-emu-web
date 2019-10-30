@@ -6,6 +6,7 @@ import CrashImage from '../libs/resources/crash.png';
 import BackgroundImage from '../libs/resources/bg.png';
 import Bios from '../libs/resources/bios.bin';
 import { withStyles } from '@material-ui/core';
+import GBAControlsHelper from './GBAControlsHelper';
 
 const styles = () => ({
     container: {
@@ -450,6 +451,8 @@ class GBAScreen extends React.Component {
             <div className={classes.container}>
                 <div className={classes.screen}>
                     <canvas id="screen" className={classes.canvas} width="480" height="320"></canvas>
+                    
+                    <GBAControlsHelper />
 
                     <div id="controls" className={classes.controls}>
                         <div id="preload">
