@@ -1,3 +1,10 @@
+/*
+	Copyright (c) 2012, Jeffrey Pfau
+	All rights reserved.
+
+	Adapted code for React context by @mateuscoelho2009
+*/
+
 import { MemoryBlock } from './mmu';
 
 function GameBoyAdvanceInterruptHandler() {

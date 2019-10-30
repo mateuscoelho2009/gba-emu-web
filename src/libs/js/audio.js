@@ -1,3 +1,10 @@
+/*
+	Copyright (c) 2012, Jeffrey Pfau
+	All rights reserved.
+
+	Adapted code for React context by @mateuscoelho2009
+*/
+
 function GameBoyAdvanceAudio() {
 	this.masterEnable = true;
 	this.masterVolume = 1.0;

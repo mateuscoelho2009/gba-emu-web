@@ -1,3 +1,10 @@
+/*
+	Copyright (c) 2012, Jeffrey Pfau
+	All rights reserved.
+
+	Adapted code for React context by @mateuscoelho2009
+*/
+
 function GameBoyAdvanceKeypad() {
 	this.KEYCODE_LEFT = 37;
 	this.KEYCODE_UP = 38;

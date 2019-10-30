@@ -1,3 +1,10 @@
+/*
+	Copyright (c) 2012, Jeffrey Pfau
+	All rights reserved.
+
+	Adapted code for React context by @mateuscoelho2009
+*/
+
 GBA.js
 ======
 **Version 1.1-git — Copyright © 2012 – 2013 Jeffrey Pfau**

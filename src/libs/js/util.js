@@ -1,3 +1,10 @@
+/*
+	Copyright (c) 2012, Jeffrey Pfau
+	All rights reserved.
+
+	Adapted code for React context by @mateuscoelho2009
+*/
+
 export function hex(number, leading, usePrefix) {
 	if (typeof(usePrefix) === 'undefined') {
 		usePrefix = true;
