@@ -46,6 +46,18 @@ function GameBoyAdvanceKeypad() {
 	this.gamepads = [];
 };
 
+GameBoyAdvanceKeypad.prototype.clickHandlerStart = function(e) {
+	var toggle = e.clickedButton || 0;
+	toggle = 1 << toggle;
+	this.currentDown &= ~toggle;
+}
+
+GameBoyAdvanceKeypad.prototype.clickHandlerEnd = function(e) {
+	var toggle = e.clickedButton || 0;
+	toggle = 1 << toggle;
+	this.currentDown |= toggle;
+}
+
 GameBoyAdvanceKeypad.prototype.keyboardHandler = function(e) {
 	var toggle = 0;
 	switch (e.keyCode) {

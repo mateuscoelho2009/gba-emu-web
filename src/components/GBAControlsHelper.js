@@ -19,6 +19,7 @@ const useStyle = makeStyles((theme) => ({
         borderRadius: 0,
         background: '#759',
         color: 'white',
+        fontWeight: 'bold',
     },
     topPaper: {
         background: '#648',
@@ -35,7 +36,7 @@ function GBAControlsHelper (props) {
                     <Paper className={`${classes.paper} ${classes.topPaper}`}>GBA Buttons</Paper>
                 </TableCell>
                 <TableCell>
-                    <Paper className={`${classes.paper} ${classes.topPaper}`}>Respective Keyboards</Paper>
+                    <Paper className={`${classes.paper} ${classes.topPaper}`}>Respective Keyboard</Paper>
                 </TableCell>
             </TableRow>
             <TableRow>

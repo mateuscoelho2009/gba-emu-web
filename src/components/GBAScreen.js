@@ -5,7 +5,7 @@ import '../libs/resources/main.css';
 import CrashImage from '../libs/resources/crash.png';
 import BackgroundImage from '../libs/resources/bg.png';
 import Bios from '../libs/resources/bios.bin';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
 import GBAControlsHelper from './GBAControlsHelper';
 
 const styles = () => ({
@@ -34,14 +34,15 @@ const styles = () => ({
             imageRendering: '-o-crisp-edges',
             zoom: 2,
             transform: 'scale(2)',
-        }
+        },
     },
     controls: {
         borderRadius: 20,
         border: '1px solid rgba(0, 0, 0, 0.4)',
         borderTop: 'none',
         boxShadow: '0 4px 4px -2px rgba(0, 0, 0, 0.9), 0 -40px 2px -1px #433061 inset',
-        width: 640,
+        width: '100vw',
+        maxWidth: 700,
         margin: 'auto',
         height: 200,
         overflow: 'hidden',
@@ -52,7 +53,8 @@ const styles = () => ({
             content: '""',
             display: 'block',
             height: 30,
-            width: 647,
+            width: 'calc(100vw + 7px)',
+            maxWidth: 707,
             borderRadius: '5px / 15px',
             border: '1px solid rgba(0, 0, 0, 0.4)',
             borderWidth: '0 1px',
@@ -100,6 +102,19 @@ const styles = () => ({
         margin: '0 0 20px',
     },
 });
+
+const commands = [
+    "LEFT",
+    "RIGHT",
+    "UP",
+    "DOWN",
+    "A",
+    "B",
+    "R",
+    "L",
+    "START",
+    "SELECT",
+];
 
 class GBAScreen extends React.Component {
     constructor(props) {
@@ -439,17 +454,33 @@ class GBAScreen extends React.Component {
             setVolume(volumeLevel);
 
             console.log(gba.audio);
-        }, false); 
+        }, false);
+
+        commands.forEach((command) => {
+            document.getElementById(command).ontouchstart = e => {
+                gba.keypad.clickHandlerStart({
+                    ...e,
+                    clickedButton: gba.keypad[command],
+                });
+            };
+    
+            document.getElementById(command).ontouchend = e => {
+                gba.keypad.clickHandlerEnd({
+                    ...e,
+                    clickedButton: gba.keypad[command],
+                });
+            };
+        });
     }
 
     render() {
         const {
             classes,
-        } = this.props;
+        } = this.props; // Canvas 480 x 320 => 320 x 214
 
         return (
             <div className={classes.container}>
-                <div className={classes.screen}>
+                <div className={classes.screen}> 
                     <canvas id="screen" className={classes.canvas} width="480" height="320"></canvas>
                     
                     <GBAControlsHelper />
@@ -476,6 +507,12 @@ class GBAScreen extends React.Component {
                             </div>
                         </div>
                     </div>
+
+                    {
+                        commands.map(command => (
+                            <Button id={command}>{command}</Button>
+                        ))
+                    }
                 </div>
             </div>
         );
