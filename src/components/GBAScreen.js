@@ -7,6 +7,7 @@ import BackgroundImage from '../libs/resources/bg.png';
 import Bios from '../libs/resources/bios.bin';
 import { withStyles, Button } from '@material-ui/core';
 import GBAControlsHelper from './GBAControlsHelper';
+import GBAMobileController from './GBAMobileController';
 
 const styles = () => ({
     container: {
@@ -103,7 +104,7 @@ const styles = () => ({
     },
 });
 
-const commands = [
+export const commands = [
     "LEFT",
     "RIGHT",
     "UP",
@@ -508,11 +509,7 @@ class GBAScreen extends React.Component {
                         </div>
                     </div>
 
-                    {
-                        commands.map(command => (
-                            <Button id={command}>{command}</Button>
-                        ))
-                    }
+                    <GBAMobileController />
                 </div>
             </div>
         );
