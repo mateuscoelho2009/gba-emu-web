@@ -1,16 +1,27 @@
 import React from 'react';
-import { Grid, Paper, makeStyles } from '@material-ui/core';
+import { Table, Paper, makeStyles, TableCell, TableRow } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
     container: {
         width: '100%',
+        maxWidth: 700,
+        margin: '16px auto',
         height: 150,
         textShadow: 'none',
+
+        '& td': {
+            padding: 0,
+        },
     },
     paper: {
-        minWidth: 'fit-content',
-        minHeight: 'fit-content',
-        padding: 4,
+        textAlign: 'center',
+        margin: 0,
+        borderRadius: 0,
+        background: '#759',
+        color: 'white',
+    },
+    topPaper: {
+        background: '#648',
     },
 }));
 
@@ -18,83 +29,72 @@ function GBAControlsHelper (props) {
     const classes = useStyle();
 
     return (
-        <Grid
-            className={classes.container}
-            container
-            spacing={3}
-            justify={'center'}
-            alignItems={'center'}
-            direction={'column'}
-        >
-            <Grid
-                item
-                container
-                spacing={3}
-                justify={'center'}
-                alignItems={'center'}
-                direction={'row'}
-                xs={6}
-            >
-                <Grid item>
-                    <Paper className={classes.paper}>GBA Buttons</Paper>
-                </Grid>
-                <Grid item>
+        <Table className={classes.container}>
+            <TableRow>
+                <TableCell>
+                    <Paper className={`${classes.paper} ${classes.topPaper}`}>GBA Buttons</Paper>
+                </TableCell>
+                <TableCell>
+                    <Paper className={`${classes.paper} ${classes.topPaper}`}>Respective Keyboards</Paper>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
                     <Paper className={classes.paper}>A</Paper>
-                </Grid>
-                <Grid item>
-                    <Paper className={classes.paper}>B</Paper>
-                </Grid>
-                <Grid item>
-                    <Paper className={classes.paper}>L</Paper>
-                </Grid>
-                <Grid item>
-                    <Paper className={classes.paper}>R</Paper>
-                </Grid>
-                <Grid item>
-                    <Paper className={classes.paper}>Start</Paper>
-                </Grid>
-                <Grid item>
-                    <Paper className={classes.paper}>Select</Paper>
-                </Grid>
-                <Grid item>
-                    <Paper className={classes.paper}>Arrows</Paper>
-                </Grid>
-            </Grid>
-            <Grid
-                item
-                container
-                spacing={3}
-                justify={'center'}
-                alignItems={'center'}
-                direction={'row'}
-                xs={6}
-            >
-                <Grid item>
-                    <Paper className={classes.paper}>Respective Keyboards</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+                <TableCell>
                     <Paper className={classes.paper}>Z</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paper className={classes.paper}>B</Paper>
+                </TableCell>
+                <TableCell>
                     <Paper className={classes.paper}>X</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paper className={classes.paper}>L</Paper>
+                </TableCell>
+                <TableCell>
                     <Paper className={classes.paper}>A</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paper className={classes.paper}>R</Paper>
+                </TableCell>
+                <TableCell>
                     <Paper className={classes.paper}>S</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paper className={classes.paper}>Start</Paper>
+                </TableCell>
+                <TableCell>
                     <Paper className={classes.paper}>Enter</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paper className={classes.paper}>Select</Paper>
+                </TableCell>
+                <TableCell>
                     <Paper className={classes.paper}>\</Paper>
-                </Grid>
-                <Grid item>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
                     <Paper className={classes.paper}>Arrows</Paper>
-                </Grid>
-            </Grid>
-        </Grid>
+                </TableCell>
+                <TableCell>
+                    <Paper className={classes.paper}>Arrows</Paper>
+                </TableCell>
+            </TableRow>
+        </Table>
     );
 }
 
