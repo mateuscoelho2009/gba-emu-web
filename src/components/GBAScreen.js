@@ -116,6 +116,15 @@ const styles = () => {
             boxShadow: '0 2px 6px -1px rgba(0, 0, 0, 0.2) inset',
             margin: '0 0 20px',
         },
+        noselect: {
+            '-webkit-touch-callout': 'none', /* iOS Safari */
+            '-webkit-user-select': 'none', /* Safari */
+            '-khtml-user-select': 'none', /* Konqueror HTML */
+            '-moz-user-select': 'none',/* Old versions of Firefox */
+            '-ms-user-select': 'none', /* Internet Explorer/Edge */
+            'user-select': 'none', /* Non-prefixed version, currently
+                                        supported by Chrome, Opera and Firefox */
+        }
     });
 };
 
@@ -514,14 +523,14 @@ class GBAScreen extends React.Component {
 
                     <div id="controls" className={classes.controls}>
                         <div id="preload">
-                            <h4>App Controls</h4>
+                            <h4 className={classes.noselect}>App Controls</h4>
                             <button className={classes.button} id="select"> Select ROM file </button>
                             <input id="loader" type="file" accept=".gba" />
                             <button className={classes.button} id="select-savegame-btn">Upload Savegame</button>
                             <input id="saveloader" type="file" />
                         </div>
                         <div id="ingame" className={classes.hidden}>
-                            <h4>In-game controls</h4>
+                            <h4 className={classes.noselect}>In-game controls</h4>
                             <button className={classes.button} id="pause">Pause game</button>
                             <button className={classes.button} id="reset-btn">Reset</button>
                             <button className={classes.button} id="download-savegame">Download Savegame File</button>
