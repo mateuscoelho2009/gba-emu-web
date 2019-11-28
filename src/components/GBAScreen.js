@@ -5,104 +5,119 @@ import '../libs/resources/main.css';
 import CrashImage from '../libs/resources/crash.png';
 import BackgroundImage from '../libs/resources/bg.png';
 import Bios from '../libs/resources/bios.bin';
-import { withStyles, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import GBAControlsHelper from './GBAControlsHelper';
 import GBAMobileController from './GBAMobileController';
 
-const styles = () => ({
-    container: {
-        width: '100%',
-        height: '100%',
-        minHeight: '100vh',
-        background: '-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)',
-        textAlign: 'center',
-        fontFamily: '"Calibri", "Verdana", sans-serif',
-        color: 'white',
-        textShadow: '0 2px rgba(0, 0, 0, 0.6)',
-    },
-    screen: {
-        background: `url('${BackgroundImage}') no-repeat top center`,
-    },
-    canvas: {
-        marginTop: 85,
-        marginBottom: 150,
-        
-        '&[width="240"]': {
-            marginTop: 42.5,
-            marginBottom: -363, /* Take up no height */
-            imageRendering: '-webkit-optimize-contrast',
-            imageRendering: '-moz-crisp-edges',
-            imageRendering: '-o-crisp-edges',
-            zoom: 2,
-            transform: 'scale(2)',
-        },
-    },
-    controls: {
-        borderRadius: 20,
-        border: '1px solid rgba(0, 0, 0, 0.4)',
-        borderTop: 'none',
-        boxShadow: '0 4px 4px -2px rgba(0, 0, 0, 0.9), 0 -40px 2px -1px #433061 inset',
-        width: '100vw',
-        maxWidth: 700,
-        margin: 'auto',
-        height: 200,
-        overflow: 'hidden',
-        backgroundColor: '#765490',
-        position: 'relative',
+const styles = () => {
+    const screenWidth = window.screen.width;
+    const width = screenWidth > 480 ? 480 : screenWidth;
+    const height = screenWidth > 480 ? 320 : 320 * screenWidth / 480;
 
-        '&::before': {
-            content: '""',
-            display: 'block',
-            height: 30,
-            width: 'calc(100vw + 7px)',
-            maxWidth: 707,
-            borderRadius: '5px / 15px',
+    return ({
+        container: {
+            width: '100%',
+            height: '100%',
+            minHeight: '100vh',
+            background: '-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)',
+            textAlign: 'center',
+            fontFamily: '"Calibri", "Verdana", sans-serif',
+            color: 'white',
+            textShadow: '0 2px rgba(0, 0, 0, 0.6)',
+        },
+        screen: {
+            background: `url('${BackgroundImage}') no-repeat top center`,
+
+            '@media (max-width:480px)': {
+                background: 'none',
+            },
+        },
+        canvas: {
+            marginTop: 85,
+            marginBottom: 150,
+            
+            '&[width="240"]': {
+                marginTop: 42.5,
+                marginBottom: -363, /* Take up no height */
+                imageRendering: '-webkit-optimize-contrast',
+                imageRendering: '-moz-crisp-edges',
+                imageRendering: '-o-crisp-edges',
+                zoom: 2,
+                transform: 'scale(2)',
+            },
+            '@media (max-width:480px)': {
+                background: 'gray',
+                marginTop: 0,
+                marginBottom: 0,
+            },
+        },
+        controls: {
+            borderRadius: 20,
             border: '1px solid rgba(0, 0, 0, 0.4)',
-            borderWidth: '0 1px',
-            margin: '0 -5px 20px',
-            background: '-moz-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061)',
-            background: '-webkit-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061)',
-            boxShadow: '0 5px 4px -3px rgba(0, 0, 0, 0.6)',
-            position: 'absolute',
+            borderTop: 'none',
+            boxShadow: '0 4px 4px -2px rgba(0, 0, 0, 0.9), 0 -40px 2px -1px #433061 inset',
+            width: '100vw',
+            maxWidth: 700,
+            margin: 'auto',
+            height: 200,
+            overflow: 'hidden',
+            backgroundColor: '#765490',
+            position: 'relative',
+
+            '&::before': {
+                content: '""',
+                display: 'block',
+                height: 30,
+                width: 'calc(100vw + 7px)',
+                maxWidth: 707,
+                borderRadius: '5px / 15px',
+                border: '1px solid rgba(0, 0, 0, 0.4)',
+                borderWidth: '0 1px',
+                margin: '0 -5px 20px',
+                background: '-moz-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061)',
+                background: '-webkit-linear-gradient(top, #8769A0, #9578B9 15%, #6A4883 50%, #433061)',
+                boxShadow: '0 5px 4px -3px rgba(0, 0, 0, 0.6)',
+                position: 'absolute',
+            },
+            '& > div': {
+                // marginTop: 30,
+                marginTop: -15,
+                transform: 'rotateX(0deg)',
+                transformOrigin: '50% 0',
+                transition: 'transform linear 0.5s',
+                '-moz-transform-origin': '50% 0',
+                '-moz-transform': 'rotateX(0deg)',
+                '-moz-transition': '-moz-transform linear 0.5s',
+                '-webkit-transform-origin-y': 2,
+                '-webkit-transform': 'rotateX(0deg)',
+                '-webkit-transition': '-webkit-transform linear 0.5s',
+            },
         },
-        '& > div': {
-            // marginTop: 30,
-            marginTop: -15,
-            transform: 'rotateX(0deg)',
-            transformOrigin: '50% 0',
-            transition: 'transform linear 0.5s',
-            '-moz-transform-origin': '50% 0',
-            '-moz-transform': 'rotateX(0deg)',
-            '-moz-transition': '-moz-transform linear 0.5s',
-            '-webkit-transform-origin-y': 2,
-            '-webkit-transform': 'rotateX(0deg)',
-            '-webkit-transition': '-webkit-transform linear 0.5s',
+        hidden: {
+            transform: 'rotateX(90deg) !important',
+            // -moz-transform: 'rotateX(90deg) !important';
+            // -webkit-transform: 'rotateX(90deg) !important';
         },
-    },
-    hidden: {
-        transform: 'rotateX(90deg) !important',
-        // -moz-transform: 'rotateX(90deg) !important';
-	    // -webkit-transform: 'rotateX(90deg) !important';
-    },
-    dead: {
-        display: 'none',
-    },
-    button: {
-        fontFamily: '"Calibri", "Verdana", sans-serif',
-        backgroundColor: '#6A4883',
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: 'white',
-        textShadow: '0 3px #433061',
-        padding: '2px 10px 5px',
-        borderRadius: '0 0 10px 10px',
-        border: '0 solid rgba(0, 0, 0, 0.4)',
-        borderWidth: '3px 1px 0px',
-        display: 'inline',
-        boxShadow: '0 2px 6px -1px rgba(0, 0, 0, 0.2) inset',
-        margin: '0 0 20px',
-    },
-});
+        dead: {
+            display: 'none',
+        },
+        button: {
+            fontFamily: '"Calibri", "Verdana", sans-serif',
+            backgroundColor: '#6A4883',
+            fontWeight: 'bold',
+            fontSize: 18,
+            color: 'white',
+            textShadow: '0 3px #433061',
+            padding: '2px 10px 5px',
+            borderRadius: '0 0 10px 10px',
+            border: '0 solid rgba(0, 0, 0, 0.4)',
+            borderWidth: '3px 1px 0px',
+            display: 'inline',
+            boxShadow: '0 2px 6px -1px rgba(0, 0, 0, 0.2) inset',
+            margin: '0 0 20px',
+        },
+    });
+};
 
 export const commands = [
     "LEFT",
@@ -304,10 +319,13 @@ class GBAScreen extends React.Component {
             load.textContent = 'SELECT';
 
             var crash = document.getElementById('crash');
+            const screenWidth = window.screen.width;
+            const width = screenWidth > 480 ? 480 : screenWidth;
+            const height = screenWidth > 480 ? 320 : 320 * screenWidth / 480;
 
             if (crash) {
                 var context = gba.targetCanvas.getContext('2d');
-                context.clearRect(0, 0, 480, 320);
+                context.clearRect(0, 0, width, height);
                 gba.video.drawCallback();
                 crash.parentElement.removeChild(crash);
                 var canvas = document.getElementById('screen');
@@ -361,25 +379,28 @@ class GBAScreen extends React.Component {
          */
         function lcdFade(context, target, callback) {
             var i = 0;
+            const screenWidth = window.screen.width;
+            const width = screenWidth > 480 ? 480 : screenWidth;
+            const height = screenWidth > 480 ? 320 : 320 * screenWidth / 480;
 
             var drawInterval = setInterval(function () {
                 i++;
 
-                var pixelData = context.getImageData(0, 0, 240, 160);
+                var pixelData = context.getImageData(0, 0, width / 2, height / 2);
 
-                for (var y = 0; y < 160; ++y) {
-                    for (var x = 0; x < 240; ++x) {
-                        var xDiff = Math.abs(x - 120);
-                        var yDiff = Math.abs(y - 80) * 0.8;
-                        var xFactor = (120 - i - xDiff) / 120;
-                        var yFactor = (80 - i - ((y & 1) * 10) - yDiff + Math.pow(xDiff, 1 / 2)) / 80;
-                        pixelData.data[(x + y * 240) * 4 + 3] *= Math.pow(xFactor, 1 / 3) * Math.pow(yFactor, 1 / 2);
+                for (var y = 0; y < height / 2; ++y) {
+                    for (var x = 0; x < width / 2; ++x) {
+                        var xDiff = Math.abs(x - width / 4);
+                        var yDiff = Math.abs(y - height / 4) * 0.8;
+                        var xFactor = (width / 4 - i - xDiff) / (width / 4);
+                        var yFactor = (height / 4 - i - ((y & 1) * 10) - yDiff + Math.pow(xDiff, 1 / 2)) / (height / 4);
+                        pixelData.data[(x + y * width / 2) * 4 + 3] *= Math.pow(xFactor, 1 / 3) * Math.pow(yFactor, 1 / 2);
                     }
                 }
                 
                 context.putImageData(pixelData, 0, 0);
 
-                target.clearRect(0, 0, 480, 320);
+                target.clearRect(0, 0, width, height);
 
                 if (i > 40) {
                     clearInterval(drawInterval);
@@ -458,19 +479,21 @@ class GBAScreen extends React.Component {
         }, false);
 
         commands.forEach((command) => {
-            document.getElementById(command).ontouchstart = e => {
-                gba.keypad.clickHandlerStart({
-                    ...e,
-                    clickedButton: gba.keypad[command],
-                });
-            };
-    
-            document.getElementById(command).ontouchend = e => {
-                gba.keypad.clickHandlerEnd({
-                    ...e,
-                    clickedButton: gba.keypad[command],
-                });
-            };
+            if (document.getElementById(command)) {
+                document.getElementById(command).ontouchstart = e => {
+                    gba.keypad.clickHandlerStart({
+                        ...e,
+                        clickedButton: gba.keypad[command],
+                    });
+                };
+        
+                document.getElementById(command).ontouchend = e => {
+                    gba.keypad.clickHandlerEnd({
+                        ...e,
+                        clickedButton: gba.keypad[command],
+                    });
+                };
+            }
         });
     }
 
@@ -478,13 +501,16 @@ class GBAScreen extends React.Component {
         const {
             classes,
         } = this.props; // Canvas 480 x 320 => 320 x 214
+        const screenWidth = window.screen.width;
+        const width = screenWidth > 480 ? 480 : screenWidth;
+        const height = screenWidth > 480 ? 320 : 320 * screenWidth / 480;
 
         return (
             <div className={classes.container}>
                 <div className={classes.screen}> 
-                    <canvas id="screen" className={classes.canvas} width="480" height="320"></canvas>
+                    <canvas id="screen" className={classes.canvas} width={`${width}`} height={`${height}`}></canvas>
                     
-                    <GBAControlsHelper />
+                    {screenWidth <= 480 ? <GBAMobileController /> : <GBAControlsHelper />}
 
                     <div id="controls" className={classes.controls}>
                         <div id="preload">
@@ -508,8 +534,6 @@ class GBAScreen extends React.Component {
                             </div>
                         </div>
                     </div>
-
-                    <GBAMobileController />
                 </div>
             </div>
         );

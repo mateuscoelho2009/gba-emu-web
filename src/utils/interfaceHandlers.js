@@ -141,10 +141,13 @@ function reset() {
     load.textContent = 'SELECT';
 
     var crash = document.getElementById('crash');
+    const screenWidth = window.screen.width;
+    const width = screenWidth > 480 ? 480 : screenWidth;
+    const height = screenWidth > 480 ? 320 : 320 * screenWidth / 480;
 
     if (crash) {
         var context = gba.targetCanvas.getContext('2d');
-        context.clearRect(0, 0, 480, 320);
+        context.clearRect(0, 0, width, height);
         gba.video.drawCallback();
         crash.parentElement.removeChild(crash);
         var canvas = document.getElementById('screen');
