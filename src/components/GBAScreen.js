@@ -14,8 +14,19 @@ const styles = () => {
     const width = screenWidth > 480 ? 480 : screenWidth;
     const height = screenWidth > 480 ? 320 : 320 * screenWidth / 480;
 
+    const noselect = {
+        '-webkit-touch-callout': 'none', /* iOS Safari */
+        '-webkit-user-select': 'none', /* Safari */
+        '-khtml-user-select': 'none', /* Konqueror HTML */
+        '-moz-user-select': 'none',/* Old versions of Firefox */
+        '-ms-user-select': 'none', /* Internet Explorer/Edge */
+        'user-select': 'none', /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+    }
+
     return ({
         container: {
+            ...noselect,
             width: '100%',
             height: '100%',
             minHeight: '100vh',
@@ -26,6 +37,7 @@ const styles = () => {
             textShadow: '0 2px rgba(0, 0, 0, 0.6)',
         },
         screen: {
+            ...noselect,
             background: `url('${BackgroundImage}') no-repeat top center`,
 
             '@media (max-width:480px)': {
@@ -33,6 +45,7 @@ const styles = () => {
             },
         },
         canvas: {
+            ...noselect,
             marginTop: 85,
             marginBottom: 150,
             
@@ -52,6 +65,7 @@ const styles = () => {
             },
         },
         controls: {
+            ...noselect,
             borderRadius: 20,
             border: '1px solid rgba(0, 0, 0, 0.4)',
             borderTop: 'none',
@@ -116,15 +130,7 @@ const styles = () => {
             boxShadow: '0 2px 6px -1px rgba(0, 0, 0, 0.2) inset',
             margin: '0 0 20px',
         },
-        noselect: {
-            '-webkit-touch-callout': 'none', /* iOS Safari */
-            '-webkit-user-select': 'none', /* Safari */
-            '-khtml-user-select': 'none', /* Konqueror HTML */
-            '-moz-user-select': 'none',/* Old versions of Firefox */
-            '-ms-user-select': 'none', /* Internet Explorer/Edge */
-            'user-select': 'none', /* Non-prefixed version, currently
-                                        supported by Chrome, Opera and Firefox */
-        }
+        noselect,
     });
 };
 
