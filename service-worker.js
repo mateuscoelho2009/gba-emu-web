@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/gba-emu-web/precache-manifest.573ec08b9e298b9927835a3a4f72d893.js"
+  "/gba-emu-web/precache-manifest.b774fc717b05cadf273a0f9168d714df.js"
 );
 
 self.addEventListener('message', (event) => {
