@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/gba-emu-web/static/css/main.9f855fef.chunk.css",
-    "main.js": "/gba-emu-web/static/js/main.5cfabf4d.chunk.js",
-    "main.js.map": "/gba-emu-web/static/js/main.5cfabf4d.chunk.js.map",
+    "main.css": "/gba-emu-web/static/css/main.3ffe042b.chunk.css",
+    "main.js": "/gba-emu-web/static/js/main.79df5d0f.chunk.js",
+    "main.js.map": "/gba-emu-web/static/js/main.79df5d0f.chunk.js.map",
     "runtime-main.js": "/gba-emu-web/static/js/runtime-main.4a672535.js",
     "runtime-main.js.map": "/gba-emu-web/static/js/runtime-main.4a672535.js.map",
-    "static/js/2.14c7dcb1.chunk.js": "/gba-emu-web/static/js/2.14c7dcb1.chunk.js",
-    "static/js/2.14c7dcb1.chunk.js.map": "/gba-emu-web/static/js/2.14c7dcb1.chunk.js.map",
+    "static/js/2.e798db9a.chunk.js": "/gba-emu-web/static/js/2.e798db9a.chunk.js",
+    "static/js/2.e798db9a.chunk.js.map": "/gba-emu-web/static/js/2.e798db9a.chunk.js.map",
     "index.html": "/gba-emu-web/index.html",
-    "precache-manifest.ba74e6354ea7dff2ecd9dbadb49502c2.js": "/gba-emu-web/precache-manifest.ba74e6354ea7dff2ecd9dbadb49502c2.js",
+    "precache-manifest.04adb90a5797a0bc4822556f56235cb2.js": "/gba-emu-web/precache-manifest.04adb90a5797a0bc4822556f56235cb2.js",
     "service-worker.js": "/gba-emu-web/service-worker.js",
-    "static/css/main.9f855fef.chunk.css.map": "/gba-emu-web/static/css/main.9f855fef.chunk.css.map",
+    "static/css/main.3ffe042b.chunk.css.map": "/gba-emu-web/static/css/main.3ffe042b.chunk.css.map",
     "static/media/bg.png": "/gba-emu-web/static/media/bg.d96f92c9.png",
     "static/media/bios.bin": "/gba-emu-web/static/media/bios.3465b6bf.bin",
     "static/media/logo.svg": "/gba-emu-web/static/media/logo.25bf045c.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.4a672535.js",
-    "static/js/2.14c7dcb1.chunk.js",
-    "static/css/main.9f855fef.chunk.css",
-    "static/js/main.5cfabf4d.chunk.js"
+    "static/js/2.e798db9a.chunk.js",
+    "static/css/main.3ffe042b.chunk.css",
+    "static/js/main.79df5d0f.chunk.js"
   ]
 }
