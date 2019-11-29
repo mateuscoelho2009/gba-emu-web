@@ -151,7 +151,28 @@ class GBAScreen extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            isFull: false,
+        };
+
         this.initGBA = this.initGBA.bind(this);
+        // this.goFull = this.goFull.bind(this);
+    }
+
+    goFull() {
+        // this.setState({ isFull: true });
+        var doc = window.document;
+        var docEl = doc.documentElement;
+        
+        var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+        var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+        
+        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+            requestFullScreen.call(docEl);
+        }
+        else {
+            cancelFullScreen.call(doc);
+        }
     }
 
     componentDidMount() {
@@ -522,10 +543,12 @@ class GBAScreen extends React.Component {
 
         return (
             <div className={classes.container}>
-                <div className={classes.screen}> 
-                    <canvas id="screen" className={classes.canvas} width={`${width}`} height={`${height}`}></canvas>
-                    
-                    {screenWidth <= 480 ? <GBAMobileController /> : <GBAControlsHelper />}
+                <div className={classes.screen}>
+                    <div id="fullscreenable">
+                        <canvas id="screen" className={classes.canvas} width={`${width}`} height={`${height}`}></canvas>
+                        
+                        {screenWidth <= 480 ? <GBAMobileController goFull={this.goFull} /> : <GBAControlsHelper />}
+                    </div>
 
                     <div id="controls" className={classes.controls}>
                         <div id="preload">

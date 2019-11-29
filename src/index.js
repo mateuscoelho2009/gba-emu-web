@@ -7,13 +7,13 @@ import App from './App';
 import Page404 from './pages/Page404';
 
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Store } from './store';
 import GBAScreen from './components/GBAScreen';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Provider store={Store}>
             <Switch>
                 <Route path="/" exact={true} component={App} />
@@ -23,7 +23,7 @@ ReactDOM.render(
                 <Route path='*' component={Page404} />
             </Switch>
         </Provider>
-    </ BrowserRouter>
+    </HashRouter>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

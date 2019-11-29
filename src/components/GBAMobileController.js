@@ -110,6 +110,9 @@ const styles = () => {
             bottom: 8,
             color: 'white',
         },
+        fullscreen: {
+            color: 'white',
+        }
     };
 };
 
@@ -126,12 +129,19 @@ const commandToStr = {
     "SELECT": "SELECT",
 }
 
-const GBAMobileController = ({ classes }) => {
+const GBAMobileController = ({ classes, goFull }) => {
+    // COmented for PWA reasons
+    // <Button className={classes.fullscreen} onClick={goFull}>Fullscreen</Button>
     return (
         <div className={classes.container}>
             {commands.map(command => (
                 <Button id={command} className={classes[command]}>{commandToStr[command]}</Button>
             ))}
+            {(document.body.requestFullscreen ||
+                document.body.mozRequestFullScreen ||
+                document.body.webkitRequestFullScreen ||
+                document.body.msRequestFullscreen) &&
+                <Button className={classes.fullscreen} onClick={goFull}>Fullscreen</Button>}
         </div>
     );
 }
