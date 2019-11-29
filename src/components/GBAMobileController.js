@@ -129,7 +129,7 @@ const commandToStr = {
     "SELECT": "SELECT",
 }
 
-const GBAMobileController = ({ classes, goFull }) => {
+const GBAMobileController = ({ classes, goFull, toogleSpeed, throttle }) => {
     // COmented for PWA reasons
     // <Button className={classes.fullscreen} onClick={goFull}>Fullscreen</Button>
     return (
@@ -142,6 +142,11 @@ const GBAMobileController = ({ classes, goFull }) => {
                 document.body.webkitRequestFullScreen ||
                 document.body.msRequestFullscreen) &&
                 <Button className={classes.fullscreen} onClick={goFull}>Fullscreen</Button>}
+            {throttle && <Button className={classes.fullscreen} onClick={toogleSpeed}>{{
+                16: '1x',
+                12: '1.5x',
+                8: '2x',
+            }[throttle]}</Button>}
         </div>
     );
 }

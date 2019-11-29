@@ -147,15 +147,19 @@ export const commands = [
     "SELECT",
 ];
 
+var gba;
+
 class GBAScreen extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isFull: false,
+            throttle: 16,
         };
 
         this.initGBA = this.initGBA.bind(this);
+        this.toogleSpeed = this.toogleSpeed.bind(this);
         // this.goFull = this.goFull.bind(this);
     }
 
@@ -175,12 +179,27 @@ class GBAScreen extends React.Component {
         }
     }
 
+    toogleSpeed() {
+        if (gba) {
+            var throttle = gba.throttle;
+
+            gba.throttle = {
+                16: 12,
+                12: 8,
+                8: 16,
+            }[throttle];
+
+            this.setState({
+                throttle: gba.throttle,
+            });
+        }
+    }
+
     componentDidMount() {
         this.initGBA();
     }
 
     initGBA() {
-        var gba;
         var runCommands = [];
         const {
             classes,
@@ -547,7 +566,7 @@ class GBAScreen extends React.Component {
                     <div id="fullscreenable">
                         <canvas id="screen" className={classes.canvas} width={`${width}`} height={`${height}`}></canvas>
                         
-                        {screenWidth <= 480 ? <GBAMobileController goFull={this.goFull} /> : <GBAControlsHelper />}
+                        {screenWidth <= 480 ? <GBAMobileController goFull={this.goFull} throttle={this.state.throttle} toogleSpeed={this.toogleSpeed} /> : <GBAControlsHelper />}
                     </div>
 
                     <div id="controls" className={classes.controls}>
