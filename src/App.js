@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,14 +28,12 @@ function App() {
           </ul>
         </p>
         <p>
-          <a
+          <Link
+            to="/emulator"
             className="App-link"
-            href="https://mateuscoelho2009.github.io/gba-emu-web/#/emulator"
-            target="_self"
-            rel="noopener noreferrer"
           >
             Run Emulator
-          </a>
+          </Link>
         </p>
       </header>
     </div>
