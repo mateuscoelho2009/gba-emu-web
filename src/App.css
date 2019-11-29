@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #aaf;
+  background-color: #765490;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,10 +24,14 @@
   text-decoration-color: #77f;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .Trending-icon {
   margin-right: 8px;
   width: 40px !important;
   height: 40px !important;
+}
+ul {
+  list-style-type: none;
 }
