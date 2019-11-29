@@ -3,6 +3,10 @@
 
 ![Pokemon Ruby Running on Browser](https://github.com/mateuscoelho2009/gba-emu-web/blob/master/public/example.png)
 
+## Access the Page in Github Pages
+
+![Online GBA Emulator!](https://mateuscoelho2009.github.io/gba-emu-web/#/emulator)
+
 ## Alpha and Omega
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
