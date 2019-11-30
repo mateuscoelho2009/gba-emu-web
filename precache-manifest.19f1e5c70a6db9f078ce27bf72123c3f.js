@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a6594c5a7cd52ed5a6ef97c92a588a27",
+    "revision": "8930bc8384c924ef2f03bff96ce58526",
     "url": "/gba-emu-web/index.html"
   },
   {
-    "revision": "877a7d847c73f01e9aa9",
-    "url": "/gba-emu-web/static/css/main.3ffe042b.chunk.css"
+    "revision": "d1914dada44c18819224",
+    "url": "/gba-emu-web/static/css/main.7ddeb45d.chunk.css"
   },
   {
-    "revision": "8bd3f0eccc66e2772b97",
-    "url": "/gba-emu-web/static/js/2.e798db9a.chunk.js"
+    "revision": "7eaf997f3fbb83f64ce8",
+    "url": "/gba-emu-web/static/js/2.db6cd39d.chunk.js"
   },
   {
-    "revision": "877a7d847c73f01e9aa9",
-    "url": "/gba-emu-web/static/js/main.79df5d0f.chunk.js"
+    "revision": "d1914dada44c18819224",
+    "url": "/gba-emu-web/static/js/main.956e68a4.chunk.js"
   },
   {
     "revision": "869f09210fa3c8abb617",
