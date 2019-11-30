@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/gba-emu-web/static/css/main.7ddeb45d.chunk.css",
-    "main.js": "/gba-emu-web/static/js/main.f56cad6b.chunk.js",
-    "main.js.map": "/gba-emu-web/static/js/main.f56cad6b.chunk.js.map",
+    "main.js": "/gba-emu-web/static/js/main.050ff630.chunk.js",
+    "main.js.map": "/gba-emu-web/static/js/main.050ff630.chunk.js.map",
     "runtime-main.js": "/gba-emu-web/static/js/runtime-main.4a672535.js",
     "runtime-main.js.map": "/gba-emu-web/static/js/runtime-main.4a672535.js.map",
-    "static/js/2.db6cd39d.chunk.js": "/gba-emu-web/static/js/2.db6cd39d.chunk.js",
-    "static/js/2.db6cd39d.chunk.js.map": "/gba-emu-web/static/js/2.db6cd39d.chunk.js.map",
+    "static/js/2.784e3dd3.chunk.js": "/gba-emu-web/static/js/2.784e3dd3.chunk.js",
+    "static/js/2.784e3dd3.chunk.js.map": "/gba-emu-web/static/js/2.784e3dd3.chunk.js.map",
     "index.html": "/gba-emu-web/index.html",
-    "precache-manifest.777bfaf091c77af44d926a94d5a7ceca.js": "/gba-emu-web/precache-manifest.777bfaf091c77af44d926a94d5a7ceca.js",
+    "precache-manifest.a904b8de0d8b89bbac08904c82eadf8f.js": "/gba-emu-web/precache-manifest.a904b8de0d8b89bbac08904c82eadf8f.js",
     "service-worker.js": "/gba-emu-web/service-worker.js",
     "static/css/main.7ddeb45d.chunk.css.map": "/gba-emu-web/static/css/main.7ddeb45d.chunk.css.map",
     "static/media/bg.png": "/gba-emu-web/static/media/bg.d96f92c9.png",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.4a672535.js",
-    "static/js/2.db6cd39d.chunk.js",
+    "static/js/2.784e3dd3.chunk.js",
     "static/css/main.7ddeb45d.chunk.css",
-    "static/js/main.f56cad6b.chunk.js"
+    "static/js/main.050ff630.chunk.js"
   ]
 }
