@@ -617,24 +617,24 @@ class GBAScreen extends React.Component {
                     <div id="controls" className={classes.controls}>
                         <div id="preload">
                             <h4 className={classes.noselect}>App Controls</h4>
-                            <button className={classes.button} id="select"> Select ROM file </button>
+                            <button className={classes.button} id="select"> Select ROM file</button>
                             <input id="loader" type="file" accept=".gba" />
                             <button className={classes.button} id="select-savegame-btn">Upload Savegame</button>
                             <input id="saveloader" type="file" />
                         </div>
                         <div id="ingame" className={classes.hidden}>
                             <h4 className={classes.noselect}>In-game controls</h4>
-                            <button className={classes.button} id="pause">Pause game</button>
+                            <button className={classes.button} id="pause">Pause</button>
                             <button className={classes.button} id="reset-btn">Reset</button>
-                            <button className={classes.button} id="download-savegame">Download Savegame File</button>
+                            <button className={classes.button} id="download-savegame">Download Savegame</button>
 
                             <div id="sound">    
                                 <Grid container spacing={2}>
-                                    <Grid item>
+                                    <Grid item xs>
                                         <p>Audio enabled</p>
                                         <WhiteCheckbox value={gba && gba.audio.masterEnable} id="audio-enabled-checkbox" />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item xs>
                                         <p>Change sound level</p>
                                         <Grid container spacing={2}>
                                             <Grid item>
