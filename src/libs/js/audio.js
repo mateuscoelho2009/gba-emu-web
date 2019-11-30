@@ -6,8 +6,8 @@
 */
 
 function GameBoyAdvanceAudio() {
-	this.masterEnable = true;
-	this.masterVolume = 1.0;
+	this.masterEnable = false;
+	this.masterVolume = 0;
 
 	this.SOUND_MAX = 0x400;
 	this.FIFO_MAX = 0x200;

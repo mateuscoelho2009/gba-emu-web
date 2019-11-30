@@ -1,5 +1,4 @@
 import React from 'react';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import GameBoyAdvance from '../libs/js/gba';
 import loadRom from '../libs/resources/xhr';
 import '../libs/resources/main.css';
@@ -9,6 +8,21 @@ import Bios from '../libs/resources/bios.bin';
 import { withStyles, Button } from '@material-ui/core';
 import GBAControlsHelper from './GBAControlsHelper';
 import GBAMobileController from './GBAMobileController';
+import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
+import Slider from '@material-ui/core/Slider';
+import VolumeDown from '@material-ui/icons/VolumeDown';
+import VolumeUp from '@material-ui/icons/VolumeUp';
+
+const WhiteCheckbox = withStyles({
+    root: {
+      color: 'white',
+      '&$checked': {
+        color: 'white',
+      },
+    },
+    checked: {},
+})(props => <Checkbox color="default" {...props} />);
 
 const styles = () => {
     const screenWidth = window.screen.width;
@@ -562,18 +576,6 @@ class GBAScreen extends React.Component {
             gba.audio.masterEnable = this.checked;
         }, false);
 
-        // Handle volume level slider
-        document.getElementById("volume-level-slider").addEventListener("change", function(){
-            var volumeLevel = this.value;
-            setVolume(volumeLevel);
-        }, false);
-        document.getElementById("volume-level-slider").addEventListener("input", function(){
-            var volumeLevel = this.value;
-            setVolume(volumeLevel);
-
-            console.log(gba.audio);
-        }, false);
-
         commands.forEach((command) => {
             if (document.getElementById(command)) {
                 document.getElementById(command).ontouchstart = e => {
@@ -626,11 +628,41 @@ class GBAScreen extends React.Component {
                             <button className={classes.button} id="reset-btn">Reset</button>
                             <button className={classes.button} id="download-savegame">Download Savegame File</button>
 
-                            <div id="sound">
-                                <p>Audio enabled</p>
-                                <input type="checkbox" id="audio-enabled-checkbox" />
-                                <p>Change sound level</p>
-                                <input id="volume-level-slider" type="range" min="0" max="1" step="any" />
+                            <div id="sound">    
+                                <Grid container spacing={2}>
+                                    <Grid item>
+                                        <p>Audio enabled</p>
+                                        <WhiteCheckbox value={gba && gba.audio.masterEnable} id="audio-enabled-checkbox" />
+                                    </Grid>
+                                    <Grid item>
+                                        <p>Change sound level</p>
+                                        <Grid container spacing={2}>
+                                            <Grid item>
+                                                <VolumeDown />
+                                            </Grid>
+                                            <Grid item xs>
+                                                <Slider
+                                                    style={{
+                                                        color: 'white',
+                                                    }}
+                                                    onChange={(e, newValue) => {
+                                                        console.log(newValue);
+                                                        gba.audio.masterVolume = Math.pow(2, newValue / 100) - 1;
+                                                    }}
+                                                    aria-labelledby="continuous-slider"
+                                                    inputProps={{
+                                                        min: 0,
+                                                        max: 100,
+                                                        type: 'number',
+                                                    }}
+                                                />
+                                            </Grid>
+                                            <Grid item>
+                                                <VolumeUp />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </div>
                         </div>
                     </div>

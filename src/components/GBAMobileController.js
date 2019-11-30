@@ -15,88 +15,60 @@ const styles = () => {
             left: 8,
             top: 150,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            border: '1px solid white',
         },
         "RIGHT": {
             position: 'absolute',
             left: 108,
             top: 150,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            border: '1px solid white',
         },
         "UP": {
             position: 'absolute',
             left: 58,
             top: 100,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            border: '1px solid white',
         },
         "DOWN": {
             position: 'absolute',
             left: 58,
             top: 200,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            border: '1px solid white',
         },
         "A": {
             position: 'absolute',
             right: 8,
-            top: 130,
+            top: 110,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            padding: '16px 0',
+            border: '1px solid white',
+            borderRadius: '50%',
         },
         "B": {
             position: 'absolute',
-            right: 58,
+            right: 68,
             top: 170,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            padding: '16px 0',
+            border: '1px solid white',
+            borderRadius: '50%',
         },
         "R": {
             position: 'absolute',
             right: 8,
             top: 30,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            border: '1px solid white',
         },
         "L": {
             position: 'absolute',
             left: 8,
             top: 30,
             color: 'white',
-
-            '& span': {
-                border: '1px solid white',
-                borderRadius: '50%',
-            },
+            border: '1px solid white',
         },
         "START": {
             position: 'absolute',
