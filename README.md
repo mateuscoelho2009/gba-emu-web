@@ -5,7 +5,7 @@
 
 ## Access the Page in Github Pages
 
-![Online GBA Emulator!](https://mateuscoelho2009.github.io/gba-emu-web/)
+[Online GBA Emulator!](https://mateuscoelho2009.github.io/gba-emu-web/#/emulator)
 
 ## Alpha and Omega
 
