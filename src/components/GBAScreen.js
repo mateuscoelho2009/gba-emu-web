@@ -328,6 +328,7 @@ class GBAScreen extends React.Component {
                 dead.parentElement.removeChild(dead);
             }
         }
+        window.onload();
 
         function fadeOut(id, nextId, kill) {
             var e = document.getElementById(id);
