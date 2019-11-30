@@ -1,11 +1,12 @@
 import React from 'react';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import GameBoyAdvance from '../libs/js/gba';
 import loadRom from '../libs/resources/xhr';
 import '../libs/resources/main.css';
 import CrashImage from '../libs/resources/crash.png';
 import BackgroundImage from '../libs/resources/bg.png';
 import Bios from '../libs/resources/bios.bin';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
 import GBAControlsHelper from './GBAControlsHelper';
 import GBAMobileController from './GBAMobileController';
 
@@ -29,6 +30,8 @@ const styles = () => {
             ...noselect,
             width: '100%',
             height: '100%',
+            overflow: 'hidden',
+            '-webkit-overflow-scrolling': 'touch',
             minHeight: '100vh',
             background: '-webkit-linear-gradient(#765490 560px, #6A4883 620px, #433061 900px)',
             textAlign: 'center',
@@ -197,13 +200,50 @@ class GBAScreen extends React.Component {
 
     componentDidMount() {
         this.initGBA();
+
+        window.addEventListener('beforeinstallprompt',e=>{
+            // For older browsers
+            e.preventDefault();
+            console.log("Install Prompt fired");
+            this.installPrompt = e;
+            // See if the app is already installed, in that case, do nothing
+            if((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true){
+              return false;
+            }
+            // Set the state variable to make button visible
+            this.setState({
+                installButton:true,
+            });
+        });
+    }
+
+    async installApp () {
+        if(!this.installPrompt) return false;
+        this.installPrompt.prompt();
+        let outcome = await this.installPrompt.userChoice;
+        if(outcome.outcome=='accepted'){
+          console.log("App Installed")
+        }
+        else{
+          console.log("App not installed");
+        }
+        // Remove the event reference
+        this.installPrompt=null;
+        // Hide the button
+        this.setState({
+          installButton:false
+        })
     }
 
     initGBA() {
         var runCommands = [];
         const {
             classes,
-        } = this.props;
+        } = this.props;  
+
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
 
         // Initialize emulator once the browser loads
         window.onload = function () {
@@ -562,6 +602,8 @@ class GBAScreen extends React.Component {
 
         return (
             <div className={classes.container}>
+                {this.state.installButton && <Button onClick={this.installApp}>Install as application</Button>}
+
                 <div className={classes.screen}>
                     <div id="fullscreenable">
                         <canvas id="screen" className={classes.canvas} width={`${width}`} height={`${height}`}></canvas>
