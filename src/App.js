@@ -2,6 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import { styled } from '@material-ui/core/styles';
+
+const MyButton = styled(Button)({
+  background: 'linear-gradient(45deg, #585490 30%, #90548C 90%)',
+  border: 0,
+  borderRadius: 3,
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  color: 'white',
+  height: 48,
+  padding: '0 30px',
+  textTransform: 'none',
+});
 
 function App() {
   return (
@@ -27,12 +40,14 @@ function App() {
             </li>
           </ul>
         </p>
-        <p>
+        <p>          
           <Link
             to="/emulator"
             className="App-link"
           >
-            Run Emulator
+            <MyButton variant="outlined"> 
+                Run Emulator
+            </MyButton>   
           </Link>
         </p>
       </header>
